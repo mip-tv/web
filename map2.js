@@ -1,6 +1,7 @@
 var layer_mapnik;
 var layer_markers;
 var markers = [];
+var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 
 function drawmap() {
     map = new OpenLayers.Map("map");
@@ -10,7 +11,7 @@ function drawmap() {
     var lonLat = new OpenLayers.LonLat(-0.1279688, 51.5077286).transform(epsg4326, projectTo);
     var zoom = 14;
     map.setCenter(lonLat, zoom);
-    var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+    
     var controls = {
         selector: new OpenLayers.Control.SelectFeature(vectorLayer, {
             onSelect: createPopup,
@@ -52,9 +53,9 @@ function incomingData(data) {
         var cS = data.servers[i]; //Stands for "currently selected Server"
         var marker = newMarker(cS.lat, cS.lon, cS.ip, cS.name, cS.hitCount, i); //nth-child is always +1 greater
         markers.push(marker);
-        layer_markers.addMarker(marker);
+        vectorLayer.addFeatures(marker);
     }
-    map.addLayer(vectorLayer);
+    map.addLayer(vectorLayer); //Finally commit changes
 }
 
 function newMarker(lon, lat, ip, name, hitCount, num) {
@@ -74,16 +75,6 @@ function newMarker(lon, lat, ip, name, hitCount, num) {
     });
     //
     vectorLayer.addFeatures(marker);
-    var markerClick = function(evt) {
-        if (this.popup == null) {
-            this.popup = feature.createPopup(feature.closeBox);
-            map.addPopup(this.popup);
-            this.popup.show();
-        } else {
-            this.popup.toggle();
-        }
-        OpenLayers.Event.stop(evt);
-    };
     return marker;
 }
 var controls = {
