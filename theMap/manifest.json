@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "MIP TV",
+  "description": "This extension will capture packets and map them on a map",
+  "version": "1.0",
+
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "popup.html"
+  },
+  "permissions": [
+   "activeTab"
+   ]
+}
