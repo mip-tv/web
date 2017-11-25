@@ -8,7 +8,7 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 // retrieve data form server
 $.ajax({
     type: 'GET',
-    url: 'http://localhost:8080/stats_servers_2.json', // TODO change to production api url
+    url: 'https://mip-tv.mgjm.de/v1/stats/servers', // TODO change to production api url
     success: function(data) { // data received -> feed chart
         console.log(data);
         var dates = [];

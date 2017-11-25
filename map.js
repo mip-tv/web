@@ -6,7 +6,7 @@ var markers = [];
 function drawmap() {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/locations_daily.json',
+        url: 'https://mip-tv.mgjm.de/v1/locations/daily?date='+Date.now(),
         success: (data) => {
             // Popup und Popuptext mit evtl. Grafik
             var popuptext = "<font color=\"black\"><b>Thomas Heiles<br>Stra&szlig;e 123<br>54290 Trier</b></font>";
@@ -49,7 +49,7 @@ function drawmap() {
 
 }
 
-function incomingData(data) {
+function incomingData(locations_dict) {
     // servers[], clientLocation   Are stored in data
     //lat, lon, ip, hitCount, name   Are stored in each server
     var zoom = 7;
@@ -58,9 +58,9 @@ function incomingData(data) {
         long: 13.364279
     };
     jumpTo(cL.long, cL.lat, zoom);
-    for (var i = 0; i < data.locations.length; i++) {
-        var cS = data.locations[i]; //Stands for "currently selected Server"
-        var marker = newMarker(cS.lat, cS.long, cS.ip, "cS.name", 40, i); //nth-child is always +1 greater
+    for (var i = 0; i < locations_dict.length; i++) {
+        var cS = locations_dict[i]; //Stands for "currently selected Server"
+        var marker = newMarker(cS.loc.lat, cS.loc.long, "0.0.0.0", "cS.name", cS.cnt, i); //nth-child is always +1 greater
         markers.push(marker);
         layer_markers.addMarker(marker);
     }
