@@ -4,10 +4,10 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
 
- $.ajax({
+ $.ajax({ // retrieve data from server
      type: 'GET',
-     url: 'http://localhost:8080/stats_countries.json',
-     success: function(data) {
+     url: 'http://localhost:8080/stats_countries.json', // TODO change to production api url
+     success: function(data) { // data received -> feed into myPieChart
          Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif', Chart.defaults.global.defaultFontColor = "#292b2c";
          var ctx = document.getElementsByClassName("myPieChart"),
              myPieChart = new Chart(ctx, {
