@@ -4,71 +4,63 @@ var layer_markers;
 var markers = [];
 
 function drawmap() {
-    // Popup und Popuptext mit evtl. Grafik
-    var popuptext = "<font color=\"black\"><b>Thomas Heiles<br>Stra&szlig;e 123<br>54290 Trier</b></font>";
-    OpenLayers.Lang.setCode('de');
-    // Position und Zoomstufe der Karte
-    var lon = 6.641389;
-    var lat = 49.756667;
-    map = new OpenLayers.Map('map', {
-        projection: new OpenLayers.Projection("EPSG:900913"),
-        displayProjection: new OpenLayers.Projection("EPSG:4326"),
-        controls: [
-            new OpenLayers.Control.Navigation(),
-            new OpenLayers.Control.PanZoomBar()
-        ],
-        maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
-        numZoomLevels: 18,
-        maxResolution: 156543,
-        units: 'meters'
-    });
-    layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
-    layer_markers = new OpenLayers.Layer.Markers("Address", {
-        projection: new OpenLayers.Projection("EPSG:4326"),
-        visibility: true,
-        displayInLayerSwitcher: false
-    });
-    map.addLayers([layer_mapnik, layer_markers]);
-    /*var controls = {
-        selector: new OpenLayers.Control.SelectFeature(vectorLayer, {
-            onSelect: createPopup,
-            onUnselect: destroyPopup
-        })
-    };
-    map.addControl(controls['selector']);
-    controls['selector'].activate();*/
-    //
-    var testData = {
-        servers: [{
-            lat: 6.641389,
-            lon: 49.756667,
-            ip: "172.0.0.1",
-            hitCount: 40,
-            name: "Den Google"
-        }, {
-            lat: 12.641389,
-            lon: 31.756667,
-            ip: "172.0.0.1",
-            hitCount: 70,
-            name: "Am Ballen"
-        }],
-        clientLocation: {
-            lat: 52.506513,
-            lon: 13.364279
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/locations_daily.json',
+        success: (data) => {
+            // Popup und Popuptext mit evtl. Grafik
+            var popuptext = "<font color=\"black\"><b>Thomas Heiles<br>Stra&szlig;e 123<br>54290 Trier</b></font>";
+            OpenLayers.Lang.setCode('de');
+            // Position und Zoomstufe der Karte
+            var lon = 6.641389;
+            var lat = 49.756667;
+            map = new OpenLayers.Map('map', {
+                projection: new OpenLayers.Projection("EPSG:900913"),
+                displayProjection: new OpenLayers.Projection("EPSG:4326"),
+                controls: [
+                    new OpenLayers.Control.Navigation(),
+                    new OpenLayers.Control.PanZoomBar()
+                ],
+                maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
+                numZoomLevels: 18,
+                maxResolution: 156543,
+                units: 'meters'
+            });
+            layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
+            layer_markers = new OpenLayers.Layer.Markers("Address", {
+                projection: new OpenLayers.Projection("EPSG:4326"),
+                visibility: true,
+                displayInLayerSwitcher: false
+            });
+            map.addLayers([layer_mapnik, layer_markers]);
+            /*var controls = {
+                selector: new OpenLayers.Control.SelectFeature(vectorLayer, {
+                    onSelect: createPopup,
+                    onUnselect: destroyPopup
+                })
+            };
+            map.addControl(controls['selector']);
+            controls['selector'].activate();*/
+            //
+
+            incomingData(data);
         }
-    }
-    incomingData(testData);
+    });
+
 }
 
 function incomingData(data) {
     // servers[], clientLocation   Are stored in data
     //lat, lon, ip, hitCount, name   Are stored in each server
     var zoom = 7;
-    var cL = data.clientLocation; //Stands for "client Location"
-    jumpTo(cL.lon, cL.lat, zoom);
-    for (var i = 0; i < data.servers.length; i++) {
-        var cS = data.servers[i]; //Stands for "currently selected Server"
-        var marker = newMarker(cS.lat, cS.lon, cS.ip, cS.name, cS.hitCount, i); //nth-child is always +1 greater
+    var cL = {
+        lat: 52.506513,
+        long: 13.364279
+    };
+    jumpTo(cL.long, cL.lat, zoom);
+    for (var i = 0; i < data.locations.length; i++) {
+        var cS = data.locations[i]; //Stands for "currently selected Server"
+        var marker = newMarker(cS.lat, cS.long, cS.ip, "cS.name", 40, i); //nth-child is always +1 greater
         markers.push(marker);
         layer_markers.addMarker(marker);
     }
