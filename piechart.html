@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                    <a id="toToggle" class="nav-link nav-link-collapse collapsed " data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-area-chart"></i>
                         <span class="nav-link-text">Stats</span>
                     </a>
@@ -47,8 +47,8 @@
                         <li>
                             <a href="linechart.html"><i class="fa fa-line-chart"></i> Amount of Servers</a>
                         </li>
-                        <li>
-                            <a href="piechart.html"><i class="fa fa-pie-chart"></i> Most Connected Servers</a>
+                        <li class="active">
+                            <a href="piechart.html"><i class="fa fa-pie-chart"></i> Most Visited Countries</a>
                         </li>
                     </ul>
                 </li>
@@ -69,6 +69,21 @@
     </nav>
     <div class="content-wrapper">
         <div class="container-fluid">
+            <!-- our pie chart -->
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-5">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fa fa-pie-chart"></i> Most visited countries </div>
+                        <div class="card-body">
+                            <canvas class="myPieChart" width="100%" height="100"></canvas>
+                        </div>
+                        <div class="card-footer small text-muted">Wow! Your requests really saw the world!</div>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
         </div>
     </div>
     <!-- /.container-fluid-->
@@ -109,13 +124,11 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
     <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
+    <script src="js/piecharts.js"></script>
     </div>
 </body>
 
