@@ -6,7 +6,7 @@ var markers = [];
 function drawmap() {
     $.ajax({
         type: 'GET',
-        url: 'https://mip-tv.mgjm.de/v1/locations/daily?date='+Date.now(),
+        url: '/v1/locations/daily?date='+Date.now(),
 		dataType: 'json',
         success: (data) => {
             // Popup und Popuptext mit evtl. Grafik
@@ -70,7 +70,7 @@ function incomingData(data) {
 }
 
 function newMarker(lon, lat, ip, name, hitCount, sum, length, num) {
-	hitCount = Math.max(10, Math.min(200, hitCount / sum * length));
+	hitCount = Math.max(10, Math.min(100, hitCount / sum * length)) * 2;
     var size = new OpenLayers.Size(hitCount, hitCount);
     var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
     var icon = new OpenLayers.Icon('marker.png', size, offset);
