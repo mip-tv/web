@@ -73,7 +73,7 @@ function newMarker(lon, lat, ip, name, hitCount, sum, length, num) {
 	hitCount = Math.max(10, Math.min(100, hitCount / sum * length)) * 2;
     var size = new OpenLayers.Size(hitCount, hitCount);
     var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-    var icon = new OpenLayers.Icon('marker icon2.png', size, offset);
+    var icon = new OpenLayers.Icon('marker.png', size, offset);
     var ll = new OpenLayers.LonLat(Lon2Merc(lon), Lat2Merc(lat));
     var feature = new OpenLayers.Feature(layer_markers, ll);
     feature.closeBox = true;
