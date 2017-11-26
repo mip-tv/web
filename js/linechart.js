@@ -9,6 +9,7 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 $.ajax({
     type: 'GET',
     url: 'https://mip-tv.mgjm.de/v1/stats/servers', // TODO change to production api url
+	dataType: 'json',
     success: function(data) { // data received -> feed chart
         console.log(data);
         var dates = [];
@@ -22,7 +23,7 @@ $.ajax({
 });
 
 function buildChart(dates, counts) {
-    var maximumCount = counts[counts.length-1];
+    var maximumCount = Math.max(...counts);
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx, {
         type: 'line',

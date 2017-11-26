@@ -1,4 +1,19 @@
+// function drawmap() {
+//     $.ajax({
+//         type: 'GET',
+//         url: 'https://mip-tv.mgjm.de/v1/stats/servers?date='+Date.now(),
+// 		dataType: 'json',
+//         success: incomingData,
+//     });
+//
+// }
+//
+// function incomingData(data) {
+// 	console.log(data);
+// }
+
 $(document).ready(function () {
+	// drawmap();
     var headings = ["IP", "Country", "Location", "Timestamp", "URI"];
     var size = headings.length;
     var dataset = [["218.31234.213424.1", "Germany", "Berlin", "today", "Blaaaaa"],
@@ -37,7 +52,7 @@ $(document).ready(function () {
         tbl = document.createElement('table-responsive');
     tbl.style.width = '100px';
     tbl.style.border = '1px solid black';
-    
+
         for (i = 0; i < rowsToAdd; i++) {
             var tr = tbl.insertRow();
             for (j = 0; j < size; j++) {
