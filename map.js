@@ -63,7 +63,7 @@ function incomingData(data) {
     jumpTo(cL.long, cL.lat, zoom);
     for (var i = 0; i < locations.length; i++) {
         var cS = locations[i]; //Stands for "currently selected Server"
-        var marker = newMarker(cS.loc.lat, cS.loc.long, "0.0.0.0", "cS.name", cS.cnt, sum, locations.length, i); //nth-child is always +1 greater
+        var marker = newMarker(cS.loc.long, cS.loc.lat, "0.0.0.0", "cS.name", cS.cnt, sum, locations.length, i); //nth-child is always +1 greater
         markers.push(marker);
         layer_markers.addMarker(marker);
     }
