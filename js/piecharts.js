@@ -5,7 +5,7 @@
  */
 $.ajax({ // retrieve data from server
   type: 'GET',
-  url: 'https://mip-tv.mgjm.de/v1/stats/countries',
+  url: '/v1/stats/countries',
   dataType: 'json',
   success: function(data) { // data received -> feed into myPieChart
     Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif', Chart.defaults.global.defaultFontColor = "#292b2c";

@@ -1,7 +1,7 @@
 // function drawmap() {
 //     $.ajax({
 //         type: 'GET',
-//         url: 'https://mip-tv.mgjm.de/v1/stats/servers?date='+Date.now(),
+//         url: '/v1/stats/servers?date='+Date.now(),
 // 		dataType: 'json',
 //         success: incomingData,
 //     });
